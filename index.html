@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pomodoro Timer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <button id="darkModeToggle">🌙</button>
+            <button id="soundToggle">🔇</button>
+        </div>
+        
+        <div id="timer">25:00</div>
+        <div class="progress-container">
+            <div id="progress-bar"></div>
+        </div>
+        
+        <div class="button-container">
+            <button onclick="startTimer()">Start</button>
+            <button onclick="pauseTimer()">Pause</button>
+            <button onclick="resetTimer()">Reset</button>
+        </div>
+        
+        <select id="timerType">
+            <option value="25">25 Minutes</option>
+            <option value="5">5 Minutes Break</option>
+            <option value="15">15 Minutes Break</option>
+            <option value="custom">Custom</option>
+        </select>
+        
+        <div class="custom-time" style="display: none;">
+            <input type="number" id="customMinutes" placeholder="Enter minutes (1-60)" min="1" max="60">
+        </div>
+        
+        <input type="text" id="taskInput" placeholder="What are you working on?">
+        
+        <div class="stats">
+            <p>Completed Pomodoros: <span id="completedCount">0</span></p>
+            <p>Total Focus Time: <span id="totalTime">0</span> minutes</p>
+        </div>
+        
+        <div class="focus-fact">
+            <p id="factText" class="fade-in"></p>
+            <div class="fact-navigation">
+                <button onclick="displayPreviousFact()">←</button>
+                <button onclick="displayNextFact()">→</button>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html> 

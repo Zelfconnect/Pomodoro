@@ -302,4 +302,9 @@ document.addEventListener('click', function(e) {
     if (!e.target.closest('#settingsToggle') && !e.target.closest('.settings-dropdown')) {
         document.querySelector('.settings-dropdown')?.classList.remove('active');
     }
-}); 
+});
+
+function addFiveMinutes() {
+    timeLeft += 5 * 60; // Add 5 minutes in seconds
+    updateDisplay();
+} 

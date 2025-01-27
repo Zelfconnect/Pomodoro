@@ -175,7 +175,11 @@ function resetTimer() {
 
 function completePomodoro() {
     completedPomodoros++;
-    const totalTime = completedPomodoros * 25;
+    // Calculate actual minutes from the timer type selected
+    const timerType = document.getElementById('timerType');
+    const focusMinutes = parseInt(timerType.value);
+    const totalTime = completedPomodoros * focusMinutes; // Changed from fixed 25 to actual timer duration
+    
     document.getElementById('completedCount').textContent = completedPomodoros;
     document.getElementById('totalTime').textContent = totalTime;
     
@@ -183,7 +187,7 @@ function completePomodoro() {
         taskHistory.push({
             task: currentTask,
             completedAt: new Date(),
-            duration: 25
+            duration: focusMinutes // Changed from fixed 25 to actual timer duration
         });
     }
 }

@@ -1,19 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap');
+
 :root {
-    --primary: #b334d6;
-    --primary-light: #4895ef;
-    --primary-dark: #3046eb;
-    --secondary: #2b2d42;
-    --accent: #48cae4;
-    --background: #54789c;
-    --surface: #ffffff;
-    --text: #1e293b;
-    --text-light: #64748b;
-    --text-muted: #94a3b8;
+    --primary: #00ffff;  /* Cyan */
+    --primary-light: #80ffff;
+    --primary-dark: #00cccc;
+    --secondary: #0066cc;  /* Deep blue */
+    --accent: #ff00ff;  /* Magenta */
+    --background: #001a33;  /* Dark navy */
+    --surface: #002b4d;  /* Lighter navy */
+    --text: #00ffff;  /* Cyan */
+    --text-light: #80ffff;
+    --text-muted: #4dffff;
     --error: #ef4444;
     --success: #10b981;
-    --shadow-sm: 0 2px 4px rgba(67, 97, 238, 0.05);
-    --shadow-md: 0 4px 6px rgba(67, 97, 238, 0.1);
-    --shadow-lg: 0 10px 15px rgba(67, 97, 238, 0.1);
+    --shadow-sm: 0 2px 4px rgba(0, 255, 255, 0.2);
+    --shadow-md: 0 4px 6px rgba(0, 255, 255, 0.3);
+    --shadow-lg: 0 8px 24px rgba(0, 255, 255, 0.2);
     --primary-blue: #89CFF0;
     --secondary-blue: #A7C7E7;
     --accent-pink: #FFE4E8;
@@ -37,6 +39,7 @@
     --spacing-md: 1.5rem;
     --spacing-lg: 2rem;
     --spacing-xl: 3rem;
+    --border-color: rgba(0, 255, 255, 0.3);
 }
 
 * {
@@ -47,8 +50,8 @@
 }
 
 body {
-    font-family: 'Inter', system-ui, -apple-system, sans-serif;
-    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    font-family: 'Roboto Mono', monospace;
+    background: var(--background);
     color: var(--text);
     line-height: 1.6;
     min-height: 100vh;
@@ -58,15 +61,24 @@ body {
 }
 
 .container {
-    max-width: 1200px;
+    max-width: 600px;
+    min-height: 100vh;
     margin: 0 auto;
     padding: var(--spacing-lg);
+    background: var(--surface);
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+    overflow: hidden;
+    border: 2px solid var(--primary);
 }
 
 .header {
-    background: var(--glass-background);
+    background: var(--background);
     backdrop-filter: blur(10px);
-    border-bottom: var(--glass-border);
+    border-bottom: 2px solid var(--primary);
     padding: var(--spacing-md) var(--spacing-lg);
     margin-bottom: var(--spacing-xl);
     display: flex;
@@ -78,8 +90,10 @@ body {
 }
 
 .header button {
+    font-family: 'Roboto Mono', monospace;
     background: var(--surface);
-    border: 1px solid rgba(226, 232, 240, 0.8);
+    color: var(--primary);
+    border: 2px solid var(--primary);
     border-radius: 8px;
     padding: 0.75rem;
     width: 40px;
@@ -89,37 +103,31 @@ body {
     justify-content: center;
     cursor: pointer;
     transition: all 0.2s ease;
-    box-shadow: var(--shadow-sm);
+    box-shadow: 2px 2px 0px var(--secondary);
     font-size: 1.25rem;
 }
 
 .header button:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-md);
-    background: var(--primary-light);
-    color: white;
+    background: var(--primary);
+    color: var(--background);
+    transform: translate(-2px, -2px);
+    box-shadow: 5px 5px 0px var(--secondary);
 }
 
 #timer {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 8rem;
+    font-size: 7rem;
     font-weight: 700;
-    background: var(--gradient-primary);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    text-align: center;
+    color: var(--primary);
+    text-shadow: 2px 2px 0px var(--secondary);
+    letter-spacing: 2px;
     margin: var(--spacing-xl) 0;
-    font-variant-numeric: tabular-nums;
-    letter-spacing: -2px;
-    line-height: 1;
-    text-shadow: 0 2px 10px rgba(67, 97, 238, 0.1);
 }
 
 .progress-container {
     width: 100%;
     height: 8px;
-    background: rgba(226, 232, 240, 0.5);
+    border: 2px solid var(--primary);
+    background: var(--background);
     border-radius: 999px;
     margin: var(--spacing-lg) 0;
     overflow: hidden;
@@ -128,33 +136,50 @@ body {
 
 #progress-bar {
     height: 100%;
-    background: linear-gradient(90deg, var(--primary) 0%, var(--primary-light) 100%);
+    background: var(--primary);
+    box-shadow: 0 0 10px var(--primary);
     transition: width 1s linear;
-    box-shadow: 0 2px 4px rgba(67, 97, 238, 0.2);
 }
 
 .button-container {
     display: flex;
     gap: var(--spacing-md);
     justify-content: center;
-    margin: var(--spacing-xl) 0;
+    margin: var(--spacing-md) 0;
+    width: 100%;
 }
 
 .button-container button {
-    background: var(--gradient-primary);
-    color: white;
-    border: none;
-    padding: 1.25rem 2.5rem;
+    font-family: 'Roboto Mono', monospace;
+    background: var(--surface);
+    color: var(--primary);
+    border: 2px solid var(--primary);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 3px 3px 0px var(--secondary);
+    padding: 1rem 2rem;
     border-radius: 12px;
-    font-size: 1.125rem;
+    font-size: 1rem;
     font-weight: 600;
     cursor: pointer;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    min-width: 140px;
+    transition: all 0.2s ease;
+    min-width: 120px;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
+}
+
+.button-container button:hover {
+    background: var(--primary);
+    color: var(--background);
+    transform: translate(-2px, -2px);
+    box-shadow: 5px 5px 0px var(--secondary);
+}
+
+.button-container button:active {
+    transform: translate(1px, 1px);
+    box-shadow: 2px 2px 0px var(--secondary);
 }
 
 .button-container button.active {
@@ -167,17 +192,18 @@ body {
 }
 
 select, input {
+    font-family: 'Roboto Mono', monospace;
     width: 100%;
     max-width: 400px;
     padding: 1.125rem;
-    border: 2px solid rgba(226, 232, 240, 0.8);
+    background: var(--background);
+    color: var(--primary);
+    border: 2px solid var(--primary);
     border-radius: 12px;
     font-size: 1.125rem;
     margin: 1rem 0;
-    background: var(--glass-background);
-    color: var(--text);
     transition: all 0.2s ease;
-    box-shadow: var(--shadow-sm);
+    box-shadow: 3px 3px 0px var(--secondary);
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
@@ -189,9 +215,9 @@ select, input {
 }
 
 select:focus, input:focus {
-    border-color: var(--primary);
-    box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.1);
     outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 10px var(--primary);
 }
 
 .custom-time {
@@ -255,9 +281,10 @@ select:focus, input:focus {
     gap: 4rem;
     margin: 2.5rem 0;
     padding: 2.5rem;
-    background: var(--gradient-surface);
+    background: var(--background);
     border-radius: 16px;
     box-shadow: var(--shadow-lg);
+    border-top: 2px solid var(--primary);
 }
 
 .stats p {
@@ -272,6 +299,7 @@ select:focus, input:focus {
     font-size: 1.5rem;
     display: block;
     margin-top: 0.5rem;
+    text-shadow: 1px 1px 0px var(--secondary);
 }
 
 .focus-fact {
@@ -315,10 +343,10 @@ select:focus, input:focus {
 
 .clock-container {
     width: 100%;
-    max-width: 800px;
+    max-width: 600px;
     background: rgba(0, 20, 40, 0.6);
-    padding: 4rem;
-    border-radius: 30px;
+    padding: 3rem 2rem;
+    border-radius: 20px;
     border: 1px solid rgba(0, 255, 255, 0.1);
     box-shadow: 
         0 8px 32px rgba(0, 0, 0, 0.3),
@@ -326,31 +354,37 @@ select:focus, input:focus {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 2rem;
-    margin: 2rem 0;
+    gap: 1.5rem;
+    margin: 1.5rem auto;
 }
 
-.timer {
-    font-size: 12rem;  /* Increased size */
-    margin: 2rem 0;
+#timer {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 7rem;
+    font-weight: 700;
+    color: var(--primary);
+    text-shadow: 2px 2px 0px var(--secondary);
+    letter-spacing: 2px;
+    text-align: center;
+    margin: 1rem 0;
 }
 
 .controls {
     width: 100%;
     display: flex;
     justify-content: center;
-    gap: 2rem;
-    margin: 2rem 0;
+    gap: 1.5rem;
+    margin: 1.5rem 0;
 }
 
 .controls button {
-    min-width: 150px;
+    min-width: 120px;
 }
 
 .timer-type-container {
     width: 100%;
     max-width: 400px;
-    margin: 2rem auto;
+    margin: 1.5rem auto;
 }
 
 .quote-section {
@@ -361,55 +395,32 @@ select:focus, input:focus {
     position: relative;
 }
 
+/* Quote styling with clean retro look */
+.quote-section,
+.focus-fact,
+#factText,
 .background-quote {
-    font-size: 2.8rem;
+    font-family: 'Roboto Mono', monospace;
+    font-weight: 700;
+    font-size: 2.4rem;
     line-height: 1.4;
     margin-bottom: 4rem;
+    color: #00ffff !important;
+    text-shadow: 2px 2px 0px #0066cc;
+    letter-spacing: 0.5px;
 }
 
-.did-you-know {
-    font-size: 5rem;
-    bottom: -2rem;
-}
-
+/* Mobile responsiveness */
 @media (max-width: 768px) {
-    body {
-        padding: 1rem;
-    }
-    
     .container {
-        padding: 1rem;
-        gap: 2rem;
+        max-width: 100%;
+        min-height: 100vh;
+        padding: var(--spacing-md);
+        box-shadow: none;
     }
     
-    .clock-container {
-        padding: 2rem;
-    }
-    
-    .timer {
-        font-size: 4rem;
-        margin: 1rem 0;
-    }
-    
-    .controls {
-        flex-direction: column;
-        align-items: center;
-        gap: 1rem;
-    }
-    
-    .controls button {
-        width: 100%;
-        max-width: 300px;
-    }
-    
-    .background-quote {
-        font-size: 2rem;
-        margin-bottom: 3rem;
-    }
-    
-    .did-you-know {
-        font-size: 3rem;
-        bottom: -1.5rem;
+    #timer {
+        font-size: 4.5rem;
     }
     
     .button-container {
@@ -418,10 +429,38 @@ select:focus, input:focus {
     
     .button-container button {
         width: 100%;
+        font-size: 0.9rem;
+    }
+    
+    .quote-section,
+    .focus-fact,
+    #factText,
+    .background-quote {
+        font-size: 1.8rem;
+        text-shadow: 1px 1px 0px #0066cc;
+    }
+    
+    .did-you-know {
+        font-size: 3rem;
+        bottom: -1.5rem;
     }
     
     .stats-grid {
         grid-template-columns: 1fr;
+    }
+    
+    .clock-container {
+        padding: 1.5rem;
+    }
+    
+    .controls {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .controls button {
+        width: 100%;
+        max-width: 200px;
     }
 }
 
@@ -579,6 +618,11 @@ body.dark-mode #taskInput {
     border-color: rgba(255, 255, 255, 0.1);
 }
 
+body.dark-mode .container {
+    background: var(--surface);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
 /* Add subtle animations */
 @keyframes pulse {
     0% { transform: scale(1); }
@@ -606,5 +650,106 @@ body.dark-mode #taskInput {
         animation-iteration-count: 1 !important;
         transition-duration: 0.01ms !important;
         scroll-behavior: auto !important;
+    }
+    .background-quote {
+        animation: none;
+    }
+}
+
+/* Ensure pause button stays within container */
+button[onclick="pauseTimer"] {
+    position: relative;
+    max-width: 120px;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+/* Add scanline effect */
+.container::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        transparent 50%,
+        rgba(0, 255, 255, 0.025) 50%
+    );
+    background-size: 100% 4px;
+    pointer-events: none;
+}
+
+/* Add subtle CRT flicker animation */
+@keyframes flicker {
+    0% { opacity: 0.99; }
+    100% { opacity: 1; }
+}
+
+.container {
+    animation: flicker 0.15s infinite;
+}
+
+/* Reduce motion if preferred */
+@media (prefers-reduced-motion: reduce) {
+    .container {
+        animation: none;
+    }
+}
+
+/* Add subtle animations */
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.02); }
+    100% { transform: scale(1); }
+}
+
+.shake {
+    animation: shake 0.5s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+}
+
+.fade-in {
+    animation: fadeIn 0.5s ease forwards;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+    .background-quote {
+        animation: none;
+    }
+}
+
+/* Ensure pause button stays within container */
+button[onclick="pauseTimer"] {
+    position: relative;
+    max-width: 120px;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+/* Could add support for high contrast mode */
+@media (prefers-contrast: high) {
+    :root {
+        --primary: #ffffff;
+        --background: #000000;
+    }
+}
+
+/* Could add print styles */
+@media print {
+    .container {
+        box-shadow: none;
+        border: 1px solid #000;
     }
 } 

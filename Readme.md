@@ -21,5 +21,4 @@ A sleek and modern Pomodoro Timer web application with a beautiful UI and helpfu
 - Google Fonts (Inter, JetBrains Mono)
 
 ## Getting Started
-
 1. Clone the repository:

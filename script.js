@@ -115,6 +115,12 @@ function startTimer() {
         }
         
         isPaused = false;
+        const pauseButton = document.querySelector('button[onclick="pauseTimer"]');
+        if (pauseButton) {
+            pauseButton.textContent = 'Pause';
+            pauseButton.classList.remove('active');
+        }
+        
         timerId = setInterval(() => {
             if (!isPaused && timeLeft > 0) {
                 timeLeft--;
@@ -147,17 +153,24 @@ function startTimer() {
 
 function pauseTimer() {
     isPaused = !isPaused;
-    const pauseButton = document.querySelector('button:nth-child(2)');
-    pauseButton.textContent = isPaused ? 'Resume' : 'Pause';
+    const pauseButton = document.querySelector('button[onclick="pauseTimer"]');
+    if (pauseButton) {
+        pauseButton.textContent = isPaused ? 'Resume' : 'Pause';
+        // Add active class when paused
+        pauseButton.classList.toggle('active', isPaused);
+    }
 }
 
 function resetTimer() {
     clearInterval(timerId);
     timerId = null;
     isPaused = false;
-    setTimerDuration(); // Use the new function to set duration
-    const pauseButton = document.querySelector('button:nth-child(2)');
-    pauseButton.textContent = 'Pause';
+    const pauseButton = document.querySelector('button[onclick="pauseTimer"]');
+    if (pauseButton) {
+        pauseButton.textContent = 'Pause';
+        pauseButton.classList.remove('active');
+    }
+    setTimerDuration();
 }
 
 function completePomodoro() {
@@ -272,4 +285,17 @@ window.addEventListener('load', () => {
     // Add event listeners for new buttons
     document.getElementById('soundToggle')?.addEventListener('click', toggleSound);
     document.getElementById('darkModeToggle')?.addEventListener('click', toggleDarkMode);
+});
+
+// Add this to your existing JavaScript
+document.getElementById('settingsToggle')?.addEventListener('click', function() {
+    const dropdown = document.querySelector('.settings-dropdown');
+    dropdown?.classList.toggle('active');
+});
+
+// Close dropdown when clicking outside
+document.addEventListener('click', function(e) {
+    if (!e.target.closest('#settingsToggle') && !e.target.closest('.settings-dropdown')) {
+        document.querySelector('.settings-dropdown')?.classList.remove('active');
+    }
 }); 

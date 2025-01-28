@@ -108,13 +108,42 @@ function toggleSound() {
 }
 
 function startTimer() {
-    // If timer is paused, just unpause it
+    // If timer is paused, resume it
     if (isPaused) {
         isPaused = false;
         const pauseButton = document.querySelector('button[onclick="pauseTimer"]');
         if (pauseButton) {
             pauseButton.textContent = 'Pause';
             pauseButton.classList.remove('active');
+        }
+        
+        // Restart the interval if it was cleared
+        if (timerId === null) {
+            timerId = setInterval(() => {
+                if (!isPaused && timeLeft > 0) {
+                    timeLeft--;
+                    updateDisplay();
+                    
+                    if (soundEnabled && timeLeft > 0) {
+                        tickSound.play().catch(() => {});
+                    }
+                    
+                    if (timeLeft === 0) {
+                        clearInterval(timerId);
+                        timerId = null;
+                        completePomodoro();
+                        if (soundEnabled) {
+                            completeSound.play().catch(() => {});
+                        }
+                        
+                        const timer = document.getElementById('timer');
+                        timer.classList.add('shake');
+                        setTimeout(() => timer.classList.remove('shake'), 500);
+                        
+                        alert('Pomodoro session completed!');
+                    }
+                }
+            }, 1000);
         }
         return;
     }
@@ -138,7 +167,6 @@ function startTimer() {
                 timeLeft--;
                 updateDisplay();
                 
-                // Play tick sound if enabled
                 if (soundEnabled && timeLeft > 0) {
                     tickSound.play().catch(() => {});
                 }
@@ -151,7 +179,6 @@ function startTimer() {
                         completeSound.play().catch(() => {});
                     }
                     
-                    // Add shake animation to timer
                     const timer = document.getElementById('timer');
                     timer.classList.add('shake');
                     setTimeout(() => timer.classList.remove('shake'), 500);
@@ -168,8 +195,13 @@ function pauseTimer() {
     const pauseButton = document.querySelector('button[onclick="pauseTimer"]');
     if (pauseButton) {
         pauseButton.textContent = isPaused ? 'Resume' : 'Pause';
-        // Add active class when paused
         pauseButton.classList.toggle('active', isPaused);
+    }
+    
+    // Clear the interval when pausing
+    if (isPaused && timerId !== null) {
+        clearInterval(timerId);
+        timerId = null;
     }
 }
 

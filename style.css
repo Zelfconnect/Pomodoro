@@ -410,57 +410,104 @@ select:focus, input:focus {
     letter-spacing: 0.5px;
 }
 
-/* Mobile responsiveness */
+/* Mobile improvements */
 @media (max-width: 768px) {
     .container {
+        padding: 1.5rem;
         max-width: 100%;
-        min-height: 100vh;
-        padding: var(--spacing-md);
-        box-shadow: none;
+        margin: 1rem;
+        border-radius: 1.5rem;
+        box-shadow: var(--shadow-lg);
     }
-    
+
     #timer {
         font-size: 4.5rem;
+        margin: 1.5rem 0;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
     }
-    
+
     .button-container {
-        flex-direction: column;
+        gap: 0.75rem;
+        margin: 1.5rem 0;
     }
-    
+
     .button-container button {
-        width: 100%;
-        font-size: 0.9rem;
+        padding: 0.75rem 1.25rem;
+        font-size: 1rem;
+        border-radius: 1rem;
+        box-shadow: var(--shadow-sm);
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
-    
-    .quote-section,
-    .focus-fact,
-    #factText,
-    .background-quote {
-        font-size: 1.8rem;
-        text-shadow: 1px 1px 0px #0066cc;
+
+    .button-container button:active {
+        transform: scale(0.95);
+        box-shadow: var(--shadow-xs);
     }
-    
-    .did-you-know {
-        font-size: 3rem;
-        bottom: -1.5rem;
+
+    #timerType, #taskInput {
+        padding: 1rem;
+        font-size: 1rem;
+        border-radius: 1rem;
+        margin: 1rem 0;
+        box-shadow: var(--shadow-sm);
     }
-    
-    .stats-grid {
-        grid-template-columns: 1fr;
+
+    .stats {
+        background: var(--surface);
+        padding: 1rem;
+        border-radius: 1rem;
+        margin: 1.5rem 0;
+        box-shadow: var(--shadow-sm);
     }
-    
-    .clock-container {
+
+    .focus-fact {
+        background: var(--surface);
         padding: 1.5rem;
+        border-radius: 1rem;
+        margin-top: 1.5rem;
+        box-shadow: var(--shadow-sm);
+        position: relative;
     }
-    
-    .controls {
-        flex-direction: column;
-        align-items: center;
+
+    #factText {
+        font-size: 0.95rem;
+        line-height: 1.5;
+        margin-bottom: 2.5rem;
     }
-    
-    .controls button {
-        width: 100%;
-        max-width: 200px;
+
+    .progress-container {
+        height: 0.75rem;
+        margin: 1.5rem 0;
+        border-radius: 1rem;
+        overflow: hidden;
+        box-shadow: inset var(--shadow-sm);
+    }
+
+    /* Add more depth to dark mode */
+    body.dark-mode .container {
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    }
+
+    body.dark-mode .button-container button,
+    body.dark-mode #timerType,
+    body.dark-mode #taskInput,
+    body.dark-mode .stats,
+    body.dark-mode .focus-fact {
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    }
+}
+
+/* Add smooth touch feedback */
+@media (hover: none) {
+    button, 
+    select, 
+    input[type="text"] {
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    button:active {
+        transform: scale(0.98);
+        transition: transform 0.1s ease;
     }
 }
 

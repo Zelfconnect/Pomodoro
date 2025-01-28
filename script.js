@@ -108,6 +108,18 @@ function toggleSound() {
 }
 
 function startTimer() {
+    // If timer is paused, just unpause it
+    if (isPaused) {
+        isPaused = false;
+        const pauseButton = document.querySelector('button[onclick="pauseTimer"]');
+        if (pauseButton) {
+            pauseButton.textContent = 'Pause';
+            pauseButton.classList.remove('active');
+        }
+        return;
+    }
+
+    // Only create new timer if one isn't already running
     if (timerId === null) {
         if (timeLeft <= 0 || isNaN(timeLeft)) {
             document.getElementById('timer').textContent = 'Invalid Time';

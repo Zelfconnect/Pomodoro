@@ -516,36 +516,60 @@ select:focus, input:focus {
 /* Quote navigation */
 .quote-nav {
     position: absolute;
-    bottom: -1.5rem;
+    bottom: -2rem;
     left: 50%;
     transform: translateX(-50%);
     display: flex;
-    gap: 1rem;
+    gap: 1.5rem;
     z-index: 2;
 }
 
 .quote-nav button {
-    background: rgba(0, 255, 255, 0.1);
-    border: 1px solid rgba(0, 255, 255, 0.2);
+    background: var(--surface);
+    border: 2px solid var(--primary);
     border-radius: 50%;
-    width: 3rem;
-    height: 3rem;
+    width: 4rem;
+    height: 4rem;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
     transition: all 0.3s ease;
+    box-shadow: var(--shadow-sm);
 }
 
 .quote-nav button:hover {
-    background: rgba(0, 255, 255, 0.2);
+    background: var(--primary);
     transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
 }
 
 .quote-nav button svg {
-    width: 1.5rem;
-    height: 1.5rem;
-    fill: #00ffff;
+    width: 2rem;
+    height: 2rem;
+    fill: var(--primary);
+}
+
+.quote-nav button:hover svg {
+    fill: var(--background);
+}
+
+/* Ensure buttons are visible in dark mode */
+body.dark-mode .quote-nav button {
+    background: var(--surface);
+    border-color: var(--primary);
+}
+
+body.dark-mode .quote-nav button svg {
+    fill: var(--primary);
+}
+
+body.dark-mode .quote-nav button:hover {
+    background: var(--primary);
+}
+
+body.dark-mode .quote-nav button:hover svg {
+    fill: var(--background);
 }
 
 /* Accessibility helper classes */

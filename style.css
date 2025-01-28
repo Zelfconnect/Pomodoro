@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap');
 
 :root {
-    --primary: #210bab;  /* Cyan */
+    --primary: #ab0bab;  /* Cyan */
     --primary-light: #80ffff;
     --primary-dark: #00cccc;
     --secondary: #0066cc;  /* Deep blue */
@@ -405,8 +405,8 @@ select:focus, input:focus {
     font-size: 2.4rem;
     line-height: 1.4;
     margin-bottom: 4rem;
-    color: #00ffff !important;
-    text-shadow: 2px 2px 0px #0066cc;
+    color: #8666ef !important;
+    text-shadow: 2px 2px 0px #48739f;
     letter-spacing: 0.5px;
 }
 

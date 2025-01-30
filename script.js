@@ -117,34 +117,32 @@ function startTimer() {
             pauseButton.classList.remove('active');
         }
         
-        // Restart the interval if it was cleared
-        if (timerId === null) {
-            timerId = setInterval(() => {
-                if (!isPaused && timeLeft > 0) {
-                    timeLeft--;
-                    updateDisplay();
-                    
-                    if (soundEnabled && timeLeft > 0) {
-                        tickSound.play().catch(() => {});
-                    }
-                    
-                    if (timeLeft === 0) {
-                        clearInterval(timerId);
-                        timerId = null;
-                        completePomodoro();
-                        if (soundEnabled) {
-                            completeSound.play().catch(() => {});
-                        }
-                        
-                        const timer = document.getElementById('timer');
-                        timer.classList.add('shake');
-                        setTimeout(() => timer.classList.remove('shake'), 500);
-                        
-                        alert('Pomodoro session completed!');
-                    }
+        // Start a new interval
+        timerId = setInterval(() => {
+            if (!isPaused && timeLeft > 0) {
+                timeLeft--;
+                updateDisplay();
+                
+                if (soundEnabled && timeLeft > 0) {
+                    tickSound.play().catch(() => {});
                 }
-            }, 1000);
-        }
+                
+                if (timeLeft === 0) {
+                    clearInterval(timerId);
+                    timerId = null;
+                    completePomodoro();
+                    if (soundEnabled) {
+                        completeSound.play().catch(() => {});
+                    }
+                    
+                    const timer = document.getElementById('timer');
+                    timer.classList.add('shake');
+                    setTimeout(() => timer.classList.remove('shake'), 500);
+                    
+                    alert('Pomodoro session completed!');
+                }
+            }
+        }, 1000);
         return;
     }
 
@@ -199,7 +197,7 @@ function pauseTimer() {
     }
     
     // Clear the interval when pausing
-    if (isPaused && timerId !== null) {
+    if (isPaused) {
         clearInterval(timerId);
         timerId = null;
     }

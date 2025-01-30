@@ -1,21 +1,21 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap');
 
 :root {
-    --primary: #ab0bab;  /* Cyan */
-    --primary-light: #80ffff;
-    --primary-dark: #00cccc;
-    --secondary: #0066cc;  /* Deep blue */
-    --accent: #ff00ff;  /* Magenta */
-    --background: #001a33;  /* Dark navy */
-    --surface: #002b4d;  /* Lighter navy */
-    --text: #00ffff;  /* Cyan */
-    --text-light: #80ffff;
-    --text-muted: #4dffff;
+    --primary: #4B6BFD;  /* Zelfconnect Blue */
+    --primary-light: #6B85FD;
+    --primary-dark: #3A55D9;
+    --secondary: #E6FFF9;  /* Mint/Light Cyan */
+    --accent: #4B6BFD;  /* Zelfconnect Blue */
+    --background: #E6FFF9;  /* Mint background */
+    --surface: #F5FFFC;  /* Lighter mint */
+    --text: #4B6BFD;  /* Zelfconnect Blue */
+    --text-light: #6B85FD;
+    --text-muted: #8B9FFF;
     --error: #ef4444;
     --success: #10b981;
-    --shadow-sm: 0 2px 4px rgba(0, 255, 255, 0.2);
-    --shadow-md: 0 4px 6px rgba(0, 255, 255, 0.3);
-    --shadow-lg: 0 8px 24px rgba(0, 255, 255, 0.2);
+    --shadow-sm: 0 2px 4px rgba(75, 107, 253, 0.1);
+    --shadow-md: 0 4px 6px rgba(75, 107, 253, 0.15);
+    --shadow-lg: 0 8px 24px rgba(75, 107, 253, 0.1);
     --primary-blue: #89CFF0;
     --secondary-blue: #A7C7E7;
     --accent-pink: #FFE4E8;
@@ -31,9 +31,9 @@
     --text-soft: rgba(255, 255, 255, 0.8);  /* Slightly dimmed text */
     --gradient-primary: linear-gradient(135deg, #4361ee 0%, #4895ef 100%);
     --gradient-surface: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
-    --glass-background: rgba(255, 255, 255, 0.7);
-    --glass-border: 1px solid rgba(255, 255, 255, 0.2);
-    --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    --glass-background: rgba(230, 255, 249, 0.7);
+    --glass-border: 1px solid rgba(75, 107, 253, 0.2);
+    --glass-shadow: 0 8px 32px rgba(75, 107, 253, 0.1);
     --spacing-xs: 0.5rem;
     --spacing-sm: 1rem;
     --spacing-md: 1.5rem;
@@ -58,6 +58,14 @@ body {
     margin: 0;
     padding: 0;
     transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Apply font to all buttons and inputs */
+button, 
+input, 
+select, 
+textarea {
+    font-family: 'Roboto Mono', monospace;
 }
 
 .container {
@@ -115,6 +123,7 @@ body {
 }
 
 #timer {
+    font-family: 'Roboto Mono', monospace;
     font-size: 7rem;
     font-weight: 700;
     color: var(--primary);
@@ -358,17 +367,6 @@ select:focus, input:focus {
     margin: 1.5rem auto;
 }
 
-#timer {
-    font-family: 'Roboto Mono', monospace;
-    font-size: 7rem;
-    font-weight: 700;
-    color: var(--primary);
-    text-shadow: 2px 2px 0px var(--secondary);
-    letter-spacing: 2px;
-    text-align: center;
-    margin: 1rem 0;
-}
-
 .controls {
     width: 100%;
     display: flex;
@@ -497,7 +495,54 @@ select:focus, input:focus {
     }
 }
 
-/* Add smooth touch feedback */
+/* Desktop/Tablet improvements */
+@media (min-width: 769px) {
+    .container {
+        max-width: 600px;
+        min-height: 100vh;
+        margin: 0 auto;
+        padding: var(--spacing-lg);
+        background: var(--surface);
+        box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        gap: var(--spacing-md);
+        overflow: hidden;
+        border: 2px solid var(--primary);
+    }
+
+    #timer {
+        font-size: 7rem;
+        margin: var(--spacing-xl) 0;
+    }
+
+    .button-container {
+        gap: var(--spacing-md);
+        margin: var(--spacing-md) 0;
+    }
+
+    .button-container button {
+        min-width: 120px;
+        padding: 1rem 2rem;
+    }
+
+    .button-container button:hover {
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-md);
+    }
+
+    .stats-grid {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    }
+
+    .focus-fact {
+        max-width: 800px;
+        margin: var(--spacing-xl) auto;
+    }
+}
+
+/* Touch device optimizations */
 @media (hover: none) {
     button, 
     select, 
@@ -509,6 +554,64 @@ select:focus, input:focus {
         transform: scale(0.98);
         transition: transform 0.1s ease;
     }
+}
+
+/* Print styles */
+@media print {
+    .container {
+        box-shadow: none;
+        border: 1px solid #000;
+    }
+    
+    .button-container,
+    .settings-container {
+        display: none;
+    }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+    :root {
+        --primary: #000000;
+        --text: #000000;
+        --background: #ffffff;
+        --surface: #ffffff;
+        --shadow-sm: none;
+        --shadow-md: none;
+        --shadow-lg: none;
+    }
+}
+
+/* Reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* Dark mode enhancements */
+body.dark-mode {
+    --background: #1A1F35;
+    --surface: #2A3147;
+    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.2);
+    --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.3);
+    --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.3);
+    background: linear-gradient(135deg, #1A1F35 0%, #2A3147 100%);
+}
+
+body.dark-mode .container {
+    box-shadow: var(--shadow-lg);
+}
+
+body.dark-mode .button-container button,
+body.dark-mode #timerType,
+body.dark-mode #taskInput,
+body.dark-mode .stats,
+body.dark-mode .focus-fact {
+    box-shadow: var(--shadow-md);
 }
 
 /* Animations */
@@ -601,24 +704,6 @@ select:focus, input:focus {
     fill: var(--background);
 }
 
-/* Ensure buttons are visible in dark mode */
-body.dark-mode .quote-nav button {
-    background: var(--surface);
-    border-color: var(--primary);
-}
-
-body.dark-mode .quote-nav button svg {
-    fill: var(--primary);
-}
-
-body.dark-mode .quote-nav button:hover {
-    background: var(--primary);
-}
-
-body.dark-mode .quote-nav button:hover svg {
-    fill: var(--background);
-}
-
 /* Accessibility helper classes */
 .visually-hidden {
     position: absolute;
@@ -629,89 +714,6 @@ body.dark-mode .quote-nav button:hover svg {
     overflow: hidden;
     clip: rect(0, 0, 0, 0);
     border: 0;
-}
-
-/* Print styles */
-@media print {
-    body {
-        background: none;
-        color: black;
-    }
-    
-    .clock-container,
-    .task-container {
-        box-shadow: none;
-        border: 1px solid #ccc;
-    }
-}
-
-/* Dark mode enhancements */
-body.dark-mode {
-    --background: #0f172a;
-    --surface: #1e293b;
-    --text: #f1f5f9;
-    --text-light: #cbd5e1;
-    --text-muted: #64748b;
-    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.2);
-    --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.3);
-    --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.3);
-    --glass-background: rgba(30, 41, 59, 0.7);
-    --glass-border: 1px solid rgba(255, 255, 255, 0.1);
-    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-}
-
-body.dark-mode .header {
-    background: rgba(30, 41, 59, 0.8);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-body.dark-mode .header button {
-    background: rgba(30, 41, 59, 0.9);
-    border-color: rgba(255, 255, 255, 0.1);
-    color: var(--text);
-}
-
-body.dark-mode select,
-body.dark-mode input {
-    background-color: rgba(30, 41, 59, 0.9);
-    border-color: rgba(255, 255, 255, 0.1);
-    color: var(--text);
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23cbd5e1' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
-}
-
-body.dark-mode .stat-card {
-    background: rgba(30, 41, 59, 0.9);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-body.dark-mode #taskInput {
-    background: rgba(30, 41, 59, 0.9);
-    border-color: rgba(255, 255, 255, 0.1);
-}
-
-body.dark-mode .container {
-    background: var(--surface);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-/* Add subtle animations */
-@keyframes pulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.02); }
-    100% { transform: scale(1); }
-}
-
-.shake {
-    animation: shake 0.5s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
-}
-
-.fade-in {
-    animation: fadeIn 0.5s ease forwards;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
 }
 
 /* Accessibility */

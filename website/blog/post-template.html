@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Post</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body>
+    <header>
+        <!-- Same navigation as index.html -->
+    </header>
+
+    <main>
+        <article id="post-content">
+            <!-- Markdown content will be loaded here -->
+        </article>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Your Name. All rights reserved.</p>
+    </footer>
+
+    <script>
+        async function loadPost() {
+            try {
+                const postSlug = window.location.pathname.split('/').pop().replace('.html', '');
+                const response = await fetch(`/blog/posts/${postSlug}.md`);
+                const markdown = await response.text();
+                document.getElementById('post-content').innerHTML = marked.parse(markdown);
+            } catch (error) {
+                console.error('Error loading post:', error);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', loadPost);
+    </script>
+</body>
+</html> 

@@ -96,17 +96,6 @@ function setTimerDuration() {
     updateDisplay();
 }
 
-// Add sound functionality
-const tickSound = new Audio('tick.mp3');
-const completeSound = new Audio('complete.mp3');
-let soundEnabled = false;
-
-function toggleSound() {
-    soundEnabled = !soundEnabled;
-    const soundButton = document.getElementById('soundToggle');
-    soundButton.textContent = soundEnabled ? '🔊' : '🔇';
-}
-
 function startTimer() {
     // If timer is paused, resume it
     if (isPaused) {
@@ -123,17 +112,10 @@ function startTimer() {
                 timeLeft--;
                 updateDisplay();
                 
-                if (soundEnabled && timeLeft > 0) {
-                    tickSound.play().catch(() => {});
-                }
-                
                 if (timeLeft === 0) {
                     clearInterval(timerId);
                     timerId = null;
                     completePomodoro();
-                    if (soundEnabled) {
-                        completeSound.play().catch(() => {});
-                    }
                     
                     const timer = document.getElementById('timer');
                     timer.classList.add('shake');
@@ -165,17 +147,10 @@ function startTimer() {
                 timeLeft--;
                 updateDisplay();
                 
-                if (soundEnabled && timeLeft > 0) {
-                    tickSound.play().catch(() => {});
-                }
-                
                 if (timeLeft === 0) {
                     clearInterval(timerId);
                     timerId = null;
                     completePomodoro();
-                    if (soundEnabled) {
-                        completeSound.play().catch(() => {});
-                    }
                     
                     const timer = document.getElementById('timer');
                     timer.classList.add('shake');
@@ -318,20 +293,6 @@ window.addEventListener('load', () => {
 
 // Add event listener to dark mode toggle button
 document.getElementById('darkModeToggle').addEventListener('click', toggleDarkMode);
-
-// When the page loads
-window.addEventListener('load', () => {
-    const factText = document.getElementById('factText');
-    factText.textContent = focusFacts[0];
-    factText.classList.add('fade-in');
-    
-    // Initialize progress bar
-    updateDisplay();
-    
-    // Add event listeners for new buttons
-    document.getElementById('soundToggle')?.addEventListener('click', toggleSound);
-    document.getElementById('darkModeToggle')?.addEventListener('click', toggleDarkMode);
-});
 
 // Add this to your existing JavaScript
 document.getElementById('settingsToggle')?.addEventListener('click', function() {

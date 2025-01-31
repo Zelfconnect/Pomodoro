@@ -92,11 +92,12 @@ textarea {
     padding: var(--spacing-md) var(--spacing-lg);
     margin-bottom: var(--spacing-xl);
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
     align-items: center;
     position: sticky;
     top: 0;
     z-index: 100;
+    width: 100%;
 }
 
 .header button {
@@ -399,19 +400,28 @@ select:focus, input:focus {
     position: relative;
 }
 
-/* Quote styling with clean retro look */
+/* Quote styling to match the rest of the design */
 .quote-section,
 .focus-fact,
-#factText,
-.background-quote {
+#factText {
     font-family: 'Roboto Mono', monospace;
-    font-weight: 700;
-    font-size: 2.4rem;
-    line-height: 1.4;
-    margin-bottom: 4rem;
-    color: #8666ef !important;
-    text-shadow: 2px 2px 0px #48739f;
+    font-size: 1.25rem;  /* Reduced from 2.4rem */
+    font-weight: 500;    /* Reduced from 700 */
+    line-height: 1.6;
+    margin-bottom: 2rem;
+    color: var(--text) !important;  /* Use the main text color */
+    text-shadow: none;   /* Removed text shadow */
     letter-spacing: 0.5px;
+}
+
+/* Mobile adjustments for quotes */
+@media (max-width: 768px) {
+    .quote-section,
+    .focus-fact,
+    #factText {
+        font-size: 1rem;
+        margin-bottom: 1.5rem;
+    }
 }
 
 /* Mobile improvements */
@@ -466,12 +476,6 @@ select:focus, input:focus {
         margin-top: 1.5rem;
         box-shadow: var(--shadow-sm);
         position: relative;
-    }
-
-    #factText {
-        font-size: 0.95rem;
-        line-height: 1.5;
-        margin-bottom: 2.5rem;
     }
 
     .progress-container {
